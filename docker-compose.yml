@@ -1,0 +1,22 @@
+version: "2.1"
+services:
+  code-server:
+    image: lscr.io/linuxserver/code-server:latest
+    container_name: VSCodeServer
+    privileged: true
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Europe/Madrid
+      - PASSWORD=CONTRASEÑA
+      - SUDO_PASSWORD=CONTRASEÑA
+      - PROXY_DOMAIN=vscode.dominio.com
+      - DEFAULT_WORKSPACE=/config/workspace
+    volumes:
+      - /volume1/docker/VSCode/config:/config
+      - /volume1/docker:/volume1/docker
+      - /var/run/docker.sock:/var/run/docker.sock
+
+    ports:
+      - 8883:8443
+    restart: unless-stopped
